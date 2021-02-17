@@ -11,5 +11,7 @@ namespace CachingWebApp.Service.Caching
         void Remove(string key);
 
         T GetOrCreate<T>(string key, TimeSpan timeExpiredCache, Func<T> cacheData);
+
+        void RemoveAll();
     }
 }

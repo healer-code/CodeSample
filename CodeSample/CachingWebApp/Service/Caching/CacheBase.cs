@@ -19,7 +19,7 @@ namespace CachingWebApp.Service.Caching
             {
                 cacheExisted = cacheData;
 
-                var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(300));
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(300));
 
                 _memoryCache.Set(cacheExisted, cacheOptions);
             }
@@ -35,6 +35,7 @@ namespace CachingWebApp.Service.Caching
             return _memoryCache.GetOrCreate(key, entry =>
             {
                 entry.SlidingExpiration = timeExpiredCache;
+                //entry.AbsoluteExpiration = timeExpiredCache;
                 return cacheData.Invoke();
             });
         }
@@ -42,6 +43,11 @@ namespace CachingWebApp.Service.Caching
         public void Remove(string key)
         {
             _memoryCache.Remove(key);
+        }
+
+        public void RemoveAll()
+        {
+            _memoryCache.Dispose();
         }
     }
 }
