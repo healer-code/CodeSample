@@ -60,7 +60,6 @@ namespace CachingWebApp.Controllers
         //}
 
         [HttpGet("Provinces")]
-        [Authorize]
         public async Task<JsonResult> Provinces()
         {
             try
