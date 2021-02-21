@@ -1,5 +1,6 @@
 ﻿using CachingWebApp.Service;
 using CachingWebApp.Service.Caching;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -60,6 +61,7 @@ namespace CachingWebApp.Controllers
         //}
 
         [HttpGet("Provinces")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<JsonResult> Provinces()
         {
             try
@@ -73,7 +75,6 @@ namespace CachingWebApp.Controllers
         }
 
         [HttpGet("Districts")]
-        [Authorize]
         public async Task<JsonResult> Districts(int provinceId)
         {
             try
